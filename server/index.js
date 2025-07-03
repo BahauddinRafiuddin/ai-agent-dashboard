@@ -12,24 +12,33 @@ import creativeWritingRouter from './routes/agentRoutes/creativeWritingRouter.js
 dotenv.config()
 
 const app = express()
-app.use(cors())
+const allowedOrigins = [
+    "http://localhost:5173", // development
+    "https://ai-agent-dashboard-client.onrender.com", // your frontend on Render
+];
+app.use(
+    cors({
+        origin: allowedOrigins,
+        credentials: true,
+    })
+);
 app.use(express.json())
 
 // Database Connection
 await connectDb()
 
 // News Agent Routes
-app.use('/api/news-agent',newsAgentRouter)
+app.use('/api/news-agent', newsAgentRouter)
 // User Routes
-app.use('/api/user',userRouter)
+app.use('/api/user', userRouter)
 // WebPage Agent Routes
-app.use('/api/webPage-agent',webPageRouter)
+app.use('/api/webPage-agent', webPageRouter)
 // PDFAgent Routers
-app.use('/api/pdf-agent',pdfRouter)
+app.use('/api/pdf-agent', pdfRouter)
 // Email Agent Routes
-app.use('/api/email-agent',emailAgentRouter)
+app.use('/api/email-agent', emailAgentRouter)
 // Creative Text Routes
-app.use('/api/creative-writing',creativeWritingRouter)
+app.use('/api/creative-writing', creativeWritingRouter)
 
 
 // Start server
