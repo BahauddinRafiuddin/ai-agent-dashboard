@@ -14,7 +14,7 @@ dotenv.config()
 const app = express()
 const allowedOrigins = [
     "http://localhost:5173", // development
-    "https://ai-agent-dashboard-client.onrender.com", // your frontend on Render
+    "https://agentflow-14fb.onrender.com", // your frontend on Render
 ];
 app.use(
     cors({
