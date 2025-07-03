@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const filePath = path.join(__dirname, 'node_modules', 'pdf-parse', 'index.js');
-const originalPattern = /if \(require\.main === module\) \{/g;
+const originalPattern = /if \(isDebugMode\) \{/g;
 const replacementText = 'if (false) { // Patched by postinstall';
 
 console.log(`[Patch Script] Attempting to patch: ${filePath}`);
@@ -14,7 +14,7 @@ console.log(`[Patch Script] Attempting to patch: ${filePath}`);
 try {
     let content = fs.readFileSync(filePath, 'utf8');
 
-    console.log('[Patch Script] --- First 500 characters of pdf-parse/index.js ---');
+    console.log('[Patch Script] --- Original pdf-parse/index.js content (first 500 chars): ---');
     console.log(content.substring(0, 500));
     console.log('[Patch Script] --- End of snippet ---');
 
@@ -28,6 +28,7 @@ try {
             console.log('✅ [Patch Script] pdf-parse/index.js appears to be already patched.');
         } else {
             console.error('❌ [Patch Script] Pattern not found and file not already patched. The `pdf-parse` source code might have changed or your `originalPattern` is incorrect.');
+            console.log('The current target pattern is: ' + originalPattern);
             console.error('Please manually inspect the pdf-parse/index.js file content logged above.');
         }
     }
