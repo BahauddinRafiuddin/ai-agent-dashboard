@@ -40,7 +40,13 @@ app.use('/api/email-agent', emailAgentRouter)
 // Creative Text Routes
 app.use('/api/creative-writing', creativeWritingRouter)
 
-
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Welcome to the Workflow AI API!',
+        status: 'Server is running',
+        // version: '1.0.0' // Optional: add your API version
+    });
+});
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
