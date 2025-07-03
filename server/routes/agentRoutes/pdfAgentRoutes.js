@@ -16,7 +16,6 @@ pdfRouter.post('/summary', authUser, upload.single('file'), async (req, res) => 
     // console.log("File",file)
     try {
         const { text } = await pdfParse(file.buffer)
-        fs.unlinkSync(file.path);
         const trimmedText = text.slice(0, 3000); // To avoid model overflow
 
         const summary = await pdfSummarizerAgent(trimmedText)
