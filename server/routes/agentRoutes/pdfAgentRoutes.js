@@ -15,8 +15,7 @@ pdfRouter.post('/summary', authUser, upload.single('file'), async (req, res) => 
     if (!file) return res.status(400).json({ success: false, message: 'No file uploaded' });
     // console.log("File",file)
     try {
-        const fileBuffer = fs.readFileSync(file.path)
-        const { text } = await pdfParse(fileBuffer)
+        const { text } = await pdfParse(file.buffer)
         fs.unlinkSync(file.path);
         const trimmedText = text.slice(0, 3000); // To avoid model overflow
 
