@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&display=swap');
+@import "tailwindcss";
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+@theme{
+   --color-primary: #8b5cf6;
+  /* Purple  */
+  --color-primary-dull: #4c1d95;
+  /*  Darker Purple*/
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.927);
+}
