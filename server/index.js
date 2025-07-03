@@ -14,14 +14,24 @@ dotenv.config()
 const app = express()
 const allowedOrigins = [
     "http://localhost:5173", // development
-    "https://agentflow-14fb.onrender.com", // your frontend on Render
+    "https://agentflow-14fb.onrender.com", // production frontend
 ];
+
 app.use(
     cors({
-        origin: allowedOrigins,
+        origin: function (origin, callback) {
+            // allow requests with no origin (like mobile apps, curl, Postman)
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin)) {
+                return callback(null, true);
+            } else {
+                return callback(new Error("Not allowed by CORS"));
+            }
+        },
         credentials: true,
     })
 );
+
 app.use(express.json())
 
 // Database Connection
